@@ -1,9 +1,11 @@
 import React, { useContext, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import classes from './ProfileForm.module.css';
 import tokenIdContext from '../../store/tokenId-context';
 
 const ProfileForm = () => {
+  const history = useHistory();
   const tokenIdCtx = useContext(tokenIdContext);
   const newPassword = useRef();
 
@@ -26,6 +28,7 @@ const ProfileForm = () => {
       
 
       if(res.ok) {
+        history.replace('/');
         const data = await res.json();
         // console.log('password changed',data);
         tokenIdCtx.addTokenId(data.idToken);

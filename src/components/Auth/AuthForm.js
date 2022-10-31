@@ -1,9 +1,11 @@
 import { useState, useRef , useContext} from 'react';
+import { useHistory } from 'react-router-dom';
 
 import classes from './AuthForm.module.css';
 import tokenIdContext from '../../store/tokenId-context';
 
 const AuthForm = () => {
+  const history = useHistory();
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const tokenIdCtx = useContext(tokenIdContext)
@@ -46,8 +48,7 @@ const AuthForm = () => {
       setIsLoading(false);
   
       if (res.ok) {
-        emailInputRef.current.value = '';
-        passwordInputRef.current.value = '';
+        history.replace('/');
         const data = await res.json();
         // console.log("auth form >>>>>>>>>", data.idToken);
 

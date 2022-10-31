@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import classes from './MainNavigation.module.css';
 import tokenIdContext from '../../store/tokenId-context';
@@ -7,6 +7,12 @@ import tokenIdContext from '../../store/tokenId-context';
 const MainNavigation = () => {
 
   const tokenIdCtx = useContext(tokenIdContext);
+  const history = useHistory();
+
+  const logoutHandler = () => {
+    tokenIdCtx.removeTokenId();
+    history.replace('/auth')
+  }
 
 
   return (
@@ -23,7 +29,7 @@ const MainNavigation = () => {
             {tokenIdCtx.isLoggedIn && <Link to='/profile'>Profile</Link>}
           </li>
           <li>
-            {tokenIdCtx.isLoggedIn && <button>Logout</button>}
+            {tokenIdCtx.isLoggedIn && <button onClick={logoutHandler}>Logout</button>}
           </li>
         </ul>
       </nav>

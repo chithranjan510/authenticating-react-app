@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Switch, Route, Redirect} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Layout from './components/Layout/Layout';
 import UserProfile from './components/Profile/UserProfile';
@@ -18,7 +18,6 @@ function App() {
           </Route>
 
           <Route path='/auth'>
-            {tokenIdCtx.isLoggedIn && <Redirect to='/profile' />}
             <AuthPage />
           </Route>
 

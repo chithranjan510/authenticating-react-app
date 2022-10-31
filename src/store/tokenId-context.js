@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 const tokenIdContext = React.createContext({
-  tokenId: '',
+  tokenId: null,
   isLoggedIn: false,
   addTokenId: () => {},
   removeTokenId: () => {},
 });
 
 export const TokenIdContextProvider = (props) => {
-  const [isTokenId, setIsTokenId] = useState('');
+  const [isTokenId, setIsTokenId] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const addtokenId = (idToken) => {
@@ -18,7 +18,8 @@ export const TokenIdContextProvider = (props) => {
   };
 
   const removeTokenId = () => {
-    setIsTokenId([]);
+    setIsLoggedIn(false);
+    setIsTokenId(null);
   };
 
   return (
