@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Switch, Route} from 'react-router-dom';
+import { Switch, Route, Redirect} from 'react-router-dom';
 
 import Layout from './components/Layout/Layout';
 import UserProfile from './components/Profile/UserProfile';
@@ -9,14 +9,6 @@ import tokenIdContext from './store/tokenId-context';
 
 function App() {
   const tokenIdCtx = useContext(tokenIdContext);
-  let isTokenId = false;
-
-  if (tokenIdCtx.tokenId.length > 0) {
-    isTokenId = true;
-  }
-  else {
-    isTokenId = false;
-  }
 
     return (
       <Layout>
@@ -26,10 +18,11 @@ function App() {
           </Route>
 
           <Route path='/auth'>
+            {tokenIdCtx.isLoggedIn && <Redirect to='/profile' />}
             <AuthPage />
           </Route>
 
-          <Route path='/profile'>{isTokenId && <UserProfile />}</Route>
+          <Route path='/profile'>{tokenIdCtx.isLoggedIn && <UserProfile />}</Route>
         </Switch>
       </Layout>
     );
