@@ -8,17 +8,18 @@ const tokenIdContext = React.createContext({
 });
 
 export const TokenIdContextProvider = (props) => {
-  const [isTokenId, setIsTokenId] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const localStorageTokenId = localStorage.getItem('tokenId');
+  const [isTokenId, setIsTokenId] = useState(localStorageTokenId);
+
+  const isLoggedIn = isTokenId ? true : false;
 
   const addtokenId = (idToken) => {
-    setIsLoggedIn(true);
+    localStorage.setItem('tokenId', idToken);
     setIsTokenId(idToken);
-    // console.log('token id context >>>>>>>>>>>>', isTokenId);
   };
 
   const removeTokenId = () => {
-    setIsLoggedIn(false);
+    localStorage.removeItem('tokenId');
     setIsTokenId(null);
   };
 
