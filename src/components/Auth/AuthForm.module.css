@@ -70,3 +70,8 @@
   background-color: transparent;
   color: #ae82cc;
 }
+
+.actions p {
+  font-size: 18px;
+  opacity: 60%;
+}
